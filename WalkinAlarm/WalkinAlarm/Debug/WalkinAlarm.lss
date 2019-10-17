@@ -1,0 +1,249 @@
+
+WalkinAlarm.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000012c  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000002  00800060  0000012c  000001c0  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000006  00800062  00800062  000001c2  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  000001c2  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000001f4  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000030  00000000  00000000  00000230  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00000536  00000000  00000000  00000260  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 000004a4  00000000  00000000  00000796  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   00000220  00000000  00000000  00000c3a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00000064  00000000  00000000  00000e5c  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    000002e9  00000000  00000000  00000ec0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    00000063  00000000  00000000  000011a9  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000020  00000000  00000000  0000120c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	10 c0       	rjmp	.+32     	; 0x22 <__ctors_end>
+   2:	2a c0       	rjmp	.+84     	; 0x58 <__bad_interrupt>
+   4:	29 c0       	rjmp	.+82     	; 0x58 <__bad_interrupt>
+   6:	28 c0       	rjmp	.+80     	; 0x58 <__bad_interrupt>
+   8:	27 c0       	rjmp	.+78     	; 0x58 <__bad_interrupt>
+   a:	26 c0       	rjmp	.+76     	; 0x58 <__bad_interrupt>
+   c:	68 c0       	rjmp	.+208    	; 0xde <__vector_6>
+   e:	24 c0       	rjmp	.+72     	; 0x58 <__bad_interrupt>
+  10:	23 c0       	rjmp	.+70     	; 0x58 <__bad_interrupt>
+  12:	22 c0       	rjmp	.+68     	; 0x58 <__bad_interrupt>
+  14:	21 c0       	rjmp	.+66     	; 0x58 <__bad_interrupt>
+  16:	20 c0       	rjmp	.+64     	; 0x58 <__bad_interrupt>
+  18:	1f c0       	rjmp	.+62     	; 0x58 <__bad_interrupt>
+  1a:	1e c0       	rjmp	.+60     	; 0x58 <__bad_interrupt>
+  1c:	1d c0       	rjmp	.+58     	; 0x58 <__bad_interrupt>
+  1e:	1c c0       	rjmp	.+56     	; 0x58 <__bad_interrupt>
+  20:	1b c0       	rjmp	.+54     	; 0x58 <__bad_interrupt>
+
+00000022 <__ctors_end>:
+  22:	11 24       	eor	r1, r1
+  24:	1f be       	out	0x3f, r1	; 63
+  26:	cf e5       	ldi	r28, 0x5F	; 95
+  28:	d1 e0       	ldi	r29, 0x01	; 1
+  2a:	de bf       	out	0x3e, r29	; 62
+  2c:	cd bf       	out	0x3d, r28	; 61
+
+0000002e <__do_copy_data>:
+  2e:	10 e0       	ldi	r17, 0x00	; 0
+  30:	a0 e6       	ldi	r26, 0x60	; 96
+  32:	b0 e0       	ldi	r27, 0x00	; 0
+  34:	ec e2       	ldi	r30, 0x2C	; 44
+  36:	f1 e0       	ldi	r31, 0x01	; 1
+  38:	02 c0       	rjmp	.+4      	; 0x3e <__SP_H__>
+  3a:	05 90       	lpm	r0, Z+
+  3c:	0d 92       	st	X+, r0
+  3e:	a2 36       	cpi	r26, 0x62	; 98
+  40:	b1 07       	cpc	r27, r17
+  42:	d9 f7       	brne	.-10     	; 0x3a <__do_copy_data+0xc>
+
+00000044 <__do_clear_bss>:
+  44:	20 e0       	ldi	r18, 0x00	; 0
+  46:	a2 e6       	ldi	r26, 0x62	; 98
+  48:	b0 e0       	ldi	r27, 0x00	; 0
+  4a:	01 c0       	rjmp	.+2      	; 0x4e <.do_clear_bss_start>
+
+0000004c <.do_clear_bss_loop>:
+  4c:	1d 92       	st	X+, r1
+
+0000004e <.do_clear_bss_start>:
+  4e:	a8 36       	cpi	r26, 0x68	; 104
+  50:	b2 07       	cpc	r27, r18
+  52:	e1 f7       	brne	.-8      	; 0x4c <.do_clear_bss_loop>
+  54:	0f d0       	rcall	.+30     	; 0x74 <main>
+  56:	68 c0       	rjmp	.+208    	; 0x128 <_exit>
+
+00000058 <__bad_interrupt>:
+  58:	d3 cf       	rjmp	.-90     	; 0x0 <__vectors>
+
+0000005a <timer1_init>:
+    }
+}
+
+void timer1_init(void)
+{
+	TCCR1B |= (1 << WGM12); // CTC Mode on Timer 1
+  5a:	8e b5       	in	r24, 0x2e	; 46
+  5c:	88 60       	ori	r24, 0x08	; 8
+  5e:	8e bd       	out	0x2e, r24	; 46
+	TIMSK1 |= (1 << OCIE1A); // Enable CTC Interrupt
+  60:	61 9a       	sbi	0x0c, 1	; 12
+	sei(); // Enable global interrupts
+  62:	78 94       	sei
+	OCR1A = 15624; // set for 1Hz
+  64:	88 e0       	ldi	r24, 0x08	; 8
+  66:	9d e3       	ldi	r25, 0x3D	; 61
+  68:	9b bd       	out	0x2b, r25	; 43
+  6a:	8a bd       	out	0x2a, r24	; 42
+	TCCR1B |= (1 << CS10) | (1 << CS11); // Prescale at Fcpu / 64
+  6c:	8e b5       	in	r24, 0x2e	; 46
+  6e:	83 60       	ori	r24, 0x03	; 3
+  70:	8e bd       	out	0x2e, r24	; 46
+  72:	08 95       	ret
+
+00000074 <main>:
+int time_now;
+int period = 3;
+
+int main(void)
+{
+    DDRA |= (1 << led);
+  74:	d2 9a       	sbi	0x1a, 2	; 26
+	DDRA &= ~(1 << prox);
+  76:	d0 98       	cbi	0x1a, 0	; 26
+	PORTA |= (1 << prox); // pull up
+  78:	d8 9a       	sbi	0x1b, 0	; 27
+	DDRA |= (1 << buzzer);
+  7a:	d1 9a       	sbi	0x1a, 1	; 26
+	timer1_init();
+  7c:	ee df       	rcall	.-36     	; 0x5a <timer1_init>
+	sei();
+  7e:	78 94       	sei
+		else 
+		{
+			PORTA &= ~(1 << led);
+			// Disable the alarm
+			PORTA &= ~(1 << buzzer);
+			time_now = timer;
+  80:	e2 e6       	ldi	r30, 0x62	; 98
+  82:	f0 e0       	ldi	r31, 0x00	; 0
+	sei();
+    while (1) 
+    {
+		
+		
+		if( ((PINA & (1 << 0)) == 1 ) )
+  84:	c8 9b       	sbis	0x19, 0	; 25
+  86:	22 c0       	rjmp	.+68     	; 0xcc <main+0x58>
+		{
+		
+			if(timer > time_now + period)
+  88:	40 91 62 00 	lds	r20, 0x0062	; 0x800062 <__data_end>
+  8c:	50 91 63 00 	lds	r21, 0x0063	; 0x800063 <__data_end+0x1>
+  90:	60 91 64 00 	lds	r22, 0x0064	; 0x800064 <__data_end+0x2>
+  94:	70 91 65 00 	lds	r23, 0x0065	; 0x800065 <__data_end+0x3>
+  98:	20 91 66 00 	lds	r18, 0x0066	; 0x800066 <time_now>
+  9c:	30 91 67 00 	lds	r19, 0x0067	; 0x800067 <time_now+0x1>
+  a0:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__data_start>
+  a4:	90 91 61 00 	lds	r25, 0x0061	; 0x800061 <__data_start+0x1>
+  a8:	82 0f       	add	r24, r18
+  aa:	93 1f       	adc	r25, r19
+  ac:	09 2e       	mov	r0, r25
+  ae:	00 0c       	add	r0, r0
+  b0:	aa 0b       	sbc	r26, r26
+  b2:	bb 0b       	sbc	r27, r27
+  b4:	84 17       	cp	r24, r20
+  b6:	95 07       	cpc	r25, r21
+  b8:	a6 07       	cpc	r26, r22
+  ba:	b7 07       	cpc	r27, r23
+  bc:	18 f7       	brcc	.-58     	; 0x84 <main+0x10>
+			{
+				time_now = timer;
+  be:	50 93 67 00 	sts	0x0067, r21	; 0x800067 <time_now+0x1>
+  c2:	40 93 66 00 	sts	0x0066, r20	; 0x800066 <time_now>
+				PORTA |= (1 << led);
+  c6:	da 9a       	sbi	0x1b, 2	; 27
+				PORTA |= (1 << buzzer);
+  c8:	d9 9a       	sbi	0x1b, 1	; 27
+  ca:	dc cf       	rjmp	.-72     	; 0x84 <main+0x10>
+				//Enable the alarm
+			}
+		}
+		else 
+		{
+			PORTA &= ~(1 << led);
+  cc:	da 98       	cbi	0x1b, 2	; 27
+			// Disable the alarm
+			PORTA &= ~(1 << buzzer);
+  ce:	d9 98       	cbi	0x1b, 1	; 27
+			time_now = timer;
+  d0:	80 81       	ld	r24, Z
+  d2:	91 81       	ldd	r25, Z+1	; 0x01
+  d4:	90 93 67 00 	sts	0x0067, r25	; 0x800067 <time_now+0x1>
+  d8:	80 93 66 00 	sts	0x0066, r24	; 0x800066 <time_now>
+  dc:	d3 cf       	rjmp	.-90     	; 0x84 <main+0x10>
+
+000000de <__vector_6>:
+	TCCR1B |= (1 << CS10) | (1 << CS11); // Prescale at Fcpu / 64
+	
+}
+
+ISR(TIM1_COMPA_vect) 
+{
+  de:	1f 92       	push	r1
+  e0:	0f 92       	push	r0
+  e2:	0f b6       	in	r0, 0x3f	; 63
+  e4:	0f 92       	push	r0
+  e6:	11 24       	eor	r1, r1
+  e8:	8f 93       	push	r24
+  ea:	9f 93       	push	r25
+  ec:	af 93       	push	r26
+  ee:	bf 93       	push	r27
+	timer++;
+  f0:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <__data_end>
+  f4:	90 91 63 00 	lds	r25, 0x0063	; 0x800063 <__data_end+0x1>
+  f8:	a0 91 64 00 	lds	r26, 0x0064	; 0x800064 <__data_end+0x2>
+  fc:	b0 91 65 00 	lds	r27, 0x0065	; 0x800065 <__data_end+0x3>
+ 100:	01 96       	adiw	r24, 0x01	; 1
+ 102:	a1 1d       	adc	r26, r1
+ 104:	b1 1d       	adc	r27, r1
+ 106:	80 93 62 00 	sts	0x0062, r24	; 0x800062 <__data_end>
+ 10a:	90 93 63 00 	sts	0x0063, r25	; 0x800063 <__data_end+0x1>
+ 10e:	a0 93 64 00 	sts	0x0064, r26	; 0x800064 <__data_end+0x2>
+ 112:	b0 93 65 00 	sts	0x0065, r27	; 0x800065 <__data_end+0x3>
+	//if(timer % 100) 
+	//{
+		//PORTA ^= (1 << led);
+	//}
+	//TIFR1 = (1 << OCF1A);
+}
+ 116:	bf 91       	pop	r27
+ 118:	af 91       	pop	r26
+ 11a:	9f 91       	pop	r25
+ 11c:	8f 91       	pop	r24
+ 11e:	0f 90       	pop	r0
+ 120:	0f be       	out	0x3f, r0	; 63
+ 122:	0f 90       	pop	r0
+ 124:	1f 90       	pop	r1
+ 126:	18 95       	reti
+
+00000128 <_exit>:
+ 128:	f8 94       	cli
+
+0000012a <__stop_program>:
+ 12a:	ff cf       	rjmp	.-2      	; 0x12a <__stop_program>
